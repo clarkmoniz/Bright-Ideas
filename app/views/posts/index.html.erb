@@ -1,0 +1,28 @@
+<h1>Hello, <%= @user.name %></h1>
+
+<div>
+	<a href="/"><input type='submit' value='Logout'></a>
+</div>
+
+<h3>Post something witty....</h3>
+	<form action='/posts/add_post' method='post'>
+		<input type='hidden' name="authenticity_token" value= "<%= form_authenticity_token %>">
+		<input	type='text' name='message'>
+		<input type='submit' value='Idea!'>
+	</form>
+<br>
+
+<% @posts.each do |post| %>
+	<p><a href="/users/<%= post.user.id %>"><%= post.user.name %></a> says:</p>
+	<p><%= post.message %></p>
+
+	<div>
+		<a href='/posts/<%= post.id %>'><input type='submit' value='<%= @likes.count %> likes'></a>
+
+		<% if @user == post.user %>
+			 <a href="/posts/<%= post.id %>/delete" data-method='delete'><input type='submit' value='Delete'></a>
+		<% else %>
+			<a href='/posts/like/<%= post.id %>'><input type='submit' value='Like'></a>
+		<% end %>
+	</div>
+<% end %>

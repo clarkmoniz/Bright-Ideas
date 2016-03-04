@@ -1,0 +1,20 @@
+<a href="/posts/index"><input type='submit' value='Ideas Dashboard'></a>
+<a href="/"><input type='submit' value='Logout'></a>
+
+<a href='/users/<%= @post.user.id %>'><p><%= @post.user.name %></a> says:</p><p><%= @post.message %></p>
+
+<h3>People who like this post!</h3>
+
+<table>
+	<tr>
+		<th>Alias</th>
+		<th>Name</th>
+	</tr>
+
+	<% @post.likers.each do |liker| %>
+		<tr>
+			<td><a href="/users/<%= liker.id %>"><%= liker.alias %></a></td>
+			<td><%= liker.name %></td>
+		</tr>
+	<% end %>
+</table>
